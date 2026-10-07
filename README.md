@@ -1,6 +1,6 @@
 # Avinash Pratap Singh | Data Analyst Portfolio
 
-Personal portfolio website of **Avinash Pratap Singh**, a Data Analyst, Business Analyst and MIS Analyst skilled in SQL, Python, Excel, Power BI and data visualization.
+Personal portfolio website of **Avinash Pratap Singh**, a Data Analyst, Business Analyst and MIS Analyst skilled in PostgreSQL, Python, Excel, Power BI and data visualization.
 
 **Live site:** [avinash490.github.io/portfolio](https://avinash490.github.io/portfolio/)
 
