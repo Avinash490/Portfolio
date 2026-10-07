@@ -1,0 +1,294 @@
+/* ============================================================
+   css/style.css | Portfolio of AVINASH PRATAP SINGH
+   Custom styles: hero grid background, chart bar animation, scroll-reveal, menu, reduced-motion rules.
+   ============================================================ */
+:root {
+   box-sizing: border-box;
+   padding-top: env(safe-area-inset-top, 0px);
+   padding-bottom: env(safe-area-inset-bottom, 0px)
+}
+
+html {
+   -webkit-text-size-adjust: 100%;
+   scroll-behavior: smooth;
+   scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px))
+}
+
+h1,
+h2,
+h3,
+.font-display {
+   font-family: 'Bricolage Grotesque', 'Public Sans', sans-serif;
+   letter-spacing: -.02em
+}
+
+.gb {
+   background-image: radial-gradient(circle at 85% 0%, rgb(37 99 235/.2), transparent 45%);
+   -webkit-mask-image: linear-gradient(#000 65%, transparent);
+   mask-image: linear-gradient(#000 65%, transparent)
+}
+
+.ts {
+   scrollbar-width: none
+}
+
+.ts::-webkit-scrollbar {
+   display: none
+}
+
+.js .rv {
+   opacity: 0;
+   transform: translateY(14px);
+   transition: opacity .6s ease, transform .6s ease
+}
+
+.js .rv.in {
+   opacity: 1;
+   transform: none
+}
+
+.bar {
+   transform-origin: bottom;
+   animation: grow .9s cubic-bezier(.2, .8, .2, 1) both
+}
+
+.pop {
+   animation: fade .35s ease-out both
+}
+
+@keyframes grow {
+   from {
+      transform: scaleY(0)
+   }
+}
+
+@keyframes fade {
+   from {
+      opacity: 0;
+      transform: translateY(6px)
+   }
+}
+
+.nl.on {
+   background: rgba(37, 99, 235, .1);
+   color: #1d4ed8
+}
+
+.dark .nl.on {
+   background: rgba(56, 189, 248, .1);
+   color: #7dd3fc
+}
+
+#mm.open {
+   display: flex
+}
+
+@media(min-width:1024px) {
+   #mm {
+      display: none !important
+   }
+}
+
+@media(prefers-reduced-motion:reduce) {
+   html {
+      scroll-behavior: auto
+   }
+
+   .js .rv {
+      opacity: 1;
+      transform: none;
+      transition: none
+   }
+
+   .bar,
+   .pop {
+      animation: none
+   }
+}
+
+/* ---- Hero profile theme: glow arch behind the cutout photo, floating SQL + bars cards ---- */
+.ph {
+   position: relative;
+   aspect-ratio: 3/4
+}
+
+.ph::before {
+   content: "";
+   position: absolute;
+   inset: 9% 2% 0;
+   border-radius: 50% 50% 12px 12px;
+   background: radial-gradient(circle at 50% 35%, rgb(56 189 248/.35), rgb(34 211 238/.08) 55%, transparent 72%);
+   border: 1px solid rgb(56 189 248/.25);
+   box-shadow: 0 0 70px rgb(56 189 248/.15)
+}
+
+.ph img {
+   position: relative;
+   display: block;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: top;
+   -webkit-mask: linear-gradient(#000 82%, transparent);
+   mask: linear-gradient(#000 82%, transparent)
+}
+
+.code {
+   position: absolute;
+   left: -12%;
+   bottom: 9%;
+   padding: .8rem 1rem;
+   font: 500 .74rem/1.6 ui-monospace, Consolas, monospace;
+   animation: fl 6s ease-in-out infinite
+}
+
+.code b {
+   color: #1d4ed8;
+   font-weight: 600
+}
+
+.dark .code b {
+   color: #38bdf8
+}
+
+.mini {
+   position: absolute;
+   right: -6%;
+   top: 14%;
+   padding: .7rem .8rem;
+   animation: fl 7s 1s ease-in-out infinite
+}
+
+.mbars {
+   display: flex;
+   align-items: flex-end;
+   gap: 4px;
+   height: 34px
+}
+
+.mbars i {
+   width: 5px;
+   height: 100%;
+   border-radius: 2px;
+   background: linear-gradient(135deg, #38bdf8, #22d3ee);
+   transform-origin: bottom;
+   animation: mbar 1.2s ease-in-out infinite alternate
+}
+
+.mbars i:nth-child(2) { animation-delay: .15s }
+.mbars i:nth-child(3) { animation-delay: .3s }
+.mbars i:nth-child(4) { animation-delay: .45s }
+.mbars i:nth-child(5) { animation-delay: .6s }
+
+/* ---- About graph (animated bars + trend line) ---- */
+.il rect {
+   transform-box: fill-box;
+   transform-origin: bottom;
+   animation: gbar 3.5s ease-in-out infinite alternate
+}
+
+.il rect:nth-child(2) { animation-delay: .3s }
+.il rect:nth-child(3) { animation-delay: .6s }
+.il rect:nth-child(4) { animation-delay: .9s }
+.il rect:nth-child(5) { animation-delay: 1.2s }
+
+.il polyline {
+   stroke-dasharray: 240;
+   animation: gdash 4s ease-in-out infinite alternate
+}
+
+@keyframes fl { 50% { transform: translateY(-8px) } }
+@keyframes mbar { from { transform: scaleY(.2) } }
+@keyframes gbar { from { transform: scaleY(.55) } }
+@keyframes gdash { from { stroke-dashoffset: 240 } to { stroke-dashoffset: 0 } }
+
+@media(max-width:600px) {
+   .code { left: 0; font-size: .68rem }
+   .mini { right: 0 }
+}
+
+@media(prefers-reduced-motion:reduce) {
+   .code, .mini, .mbars i, .il rect, .il polyline { animation: none }
+}
+
+/* ---- Blue theme page background (body has class "pbg") ---- */
+.pbg {
+   background-color: #eaf2ff;
+   background-image: linear-gradient(180deg, #dbeafe 0, #eaf2ff 560px, #f0f6ff 100%)
+}
+
+.dark .pbg {
+   background-color: #07101f;
+   background-image: linear-gradient(180deg, #0c1d40 0, #07101f 600px)
+}
+
+/* ---- Animated background (ported from the first portfolio) ----
+   1) #bg canvas: drifting data-network (js/background.js)
+   2) body::before: slowly scrolling grid
+   3) #cg: soft glow that follows the mouse (desktop only)
+   Colours switch with the .dark class on <html>. */
+#bg {
+   position: fixed;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 0;
+   pointer-events: none;
+   opacity: .6
+}
+
+/* light theme needs full strength to show on the pale blue page */
+html:not(.dark) #bg {
+   opacity: 1
+}
+
+body::before {
+   content: "";
+   position: fixed;
+   left: 0;
+   right: 0;
+   top: -56px;
+   bottom: 0;
+   z-index: 0;
+   pointer-events: none;
+   background: linear-gradient(rgb(37 99 235/.11) 1px, transparent 1px) 0 0/56px 56px, linear-gradient(90deg, rgb(37 99 235/.11) 1px, transparent 1px) 0 0/56px 56px;
+   animation: bgpan 8s linear infinite
+}
+
+.dark body::before {
+   background: linear-gradient(rgb(56 189 248/.05) 1px, transparent 1px) 0 0/56px 56px, linear-gradient(90deg, rgb(56 189 248/.05) 1px, transparent 1px) 0 0/56px 56px
+}
+
+@keyframes bgpan { to { transform: translateY(56px) } }
+
+#cg {
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 520px;
+   height: 520px;
+   margin: -260px 0 0 -260px;
+   background: radial-gradient(circle, rgb(37 99 235/.14), transparent 65%);
+   pointer-events: none;
+   z-index: 0;
+   will-change: transform
+}
+
+.dark #cg {
+   background: radial-gradient(circle, rgb(56 189 248/.07), transparent 65%)
+}
+
+@media(hover:none) {
+   #cg { display: none }
+}
+
+/* page content sits above the animation (header is already z-50) */
+main,
+footer {
+   position: relative;
+   z-index: 1
+}
+
+@media(prefers-reduced-motion:reduce) {
+   body::before { animation: none }
+}

@@ -1,0 +1,263 @@
+<!doctype html>
+<!--
+  PORTFOLIO WEBSITE: AVINASH PRATAP SINGH | Data Analyst | Business Analyst | MIS Analyst
+  index.html = page structure (navbar, hero with photo, footer), SEO text and Tailwind setup.
+  FILES: css/style.css (custom styles) | js/data.js (EDIT YOUR CONTENT HERE) |
+         js/components.js (builds sections) | js/interactions.js (theme, menu, form, scroll) |
+         js/background.js (animated background)
+         avinash.png + avinash.webp (your photo) | Avinash_Pratap_Singh_Resume.pdf (resume download)
+  OPEN: double-click this file (internet needed for fonts, Tailwind and icons).
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>
+      Avinash Pratap Singh | Data Analyst Portfolio – SQL, Python, Power BI
+    </title>
+    <meta
+      name="description"
+      content="Portfolio of Avinash Pratap Singh, a detail-oriented Data Analyst skilled in SQL, Python, Excel, Power BI and EDA. Explore skills, experience, projects and get in touch."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Public+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("theme");
+        if (
+          t === "dark" ||
+          (!t && matchMedia("(prefers-color-scheme: dark)").matches)
+        )
+          document.documentElement.classList.add("dark");
+      } catch (e) {}
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Public Sans"', "system-ui", "sans-serif"],
+              display: ['"Bricolage Grotesque"', '"Public Sans"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .card {
+          @apply rounded-2xl border border-blue-100 bg-white dark:border-blue-900/40 dark:bg-[#0d1a33];
+        }
+        .btn {
+          @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600;
+        }
+        .btn-p {
+          @apply bg-blue-700 text-white shadow-lg shadow-blue-700/20 hover:bg-blue-600;
+        }
+        .btn-g {
+          @apply border border-slate-300 text-slate-800 hover:border-blue-600 hover:text-blue-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:text-sky-300;
+        }
+        .chip {
+          @apply rounded-md bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-800 dark:bg-sky-400/10 dark:text-sky-300;
+        }
+        .field {
+          @apply w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-base text-slate-900 outline-none sm:text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-blue-900/60 dark:bg-[#0a1630] dark:text-white;
+        }
+        .sb {
+          @apply grid h-11 w-11 place-items-center sm:h-10 sm:w-10 rounded-xl border border-slate-300 text-slate-700 transition dark:border-slate-700 dark:text-slate-300;
+        }
+        .ib {
+          @apply grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-700 dark:bg-sky-400/10 dark:text-sky-300;
+        }
+        .h2 {
+          @apply text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl;
+        }
+        .t {
+          @apply text-slate-900 dark:text-white;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body
+    class="pbg overflow-x-clip font-sans text-slate-700 antialiased dark:text-slate-300"
+  >
+    <!-- animated background (see js/background.js and the "Animated background" block in css/style.css) -->
+    <canvas id="bg" aria-hidden="true"></canvas>
+    <div id="cg" aria-hidden="true"></div>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-lg focus:bg-blue-700 focus:px-4 focus:py-2 focus:text-white"
+      >Skip to content</a
+    >
+    <header
+      class="sticky z-50 border-b border-blue-200/60 bg-blue-50/85 backdrop-blur dark:border-blue-900/50 dark:bg-[#07101f]/85"
+      style="top: env(safe-area-inset-top, 0px)"
+    >
+      <nav
+        aria-label="Primary"
+        class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5"
+      >
+        <a href="#home" class="font-display text-lg font-extrabold t"
+          >Avinash<span class="text-blue-600">.</span></a
+        >
+        <div id="links" class="hidden items-center gap-0.5 lg:flex"></div>
+        <div class="flex items-center gap-2">
+          <button
+            id="theme"
+            aria-label="Toggle dark mode"
+            class="sb hover:border-blue-600"
+          >
+            <i data-lucide="moon" class="h-[18px] w-[18px] dark:hidden"></i
+            ><i
+              data-lucide="sun"
+              class="hidden h-[18px] w-[18px] dark:block"
+            ></i>
+          </button>
+          <a class="btn btn-p rs hidden sm:inline-flex" download
+            ><i data-lucide="download" class="h-4 w-4"></i>Download Resume</a
+          >
+          <button
+            id="mb"
+            aria-expanded="false"
+            aria-label="Toggle menu"
+            class="sb lg:hidden"
+          >
+            <i data-lucide="menu" class="h-[18px] w-[18px]"></i>
+          </button>
+        </div>
+      </nav>
+      <div
+        id="mm"
+        class="hidden flex-col gap-1 border-t border-slate-200 px-5 py-3 dark:border-slate-800"
+      ></div>
+    </header>
+    <main id="main">
+      <section id="home" class="relative overflow-hidden">
+        <div aria-hidden="true" class="gb absolute inset-0 -z-10"></div>
+        <div
+          class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-10 sm:gap-14 sm:pb-20 sm:pt-14 lg:grid-cols-[1.1fr_1fr] lg:pt-24"
+        >
+          <div>
+            <h1
+              class="break-words text-[2.1rem] font-extrabold leading-[1.08] t sm:text-6xl"
+            >
+              Hi, I'm Avinash Pratap Singh
+            </h1>
+            <p
+              class="mt-4 inline-block rounded-full bg-slate-900 px-4 py-1.5 text-sm font-semibold text-white dark:bg-sky-400 dark:text-slate-950"
+            >
+              Data Analyst | Business Analyst | MIS Analyst
+            </p>
+            <p
+              class="mt-6 font-display text-2xl font-bold text-blue-700 dark:text-sky-400 sm:text-3xl"
+            >
+              Turning data into meaningful insights and actionable business
+              decisions.
+            </p>
+            <p class="mt-4 max-w-xl leading-relaxed">
+              Detail-oriented Data Analyst skilled in SQL, Python, Excel, Power
+              BI, data visualization, and exploratory data analysis. I transform
+              raw data into meaningful insights and interactive dashboards that
+              support data-driven decision-making.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a href="#projects" class="btn btn-p"
+                >View My Projects
+                <i data-lucide="arrow-right" class="h-4 w-4"></i
+              ></a>
+              <a class="btn btn-g rs" download
+                ><i data-lucide="download" class="h-4 w-4"></i>Download
+                Resume</a
+              >
+              <a href="#contact" class="btn btn-g">Contact Me</a>
+            </div>
+            <div class="soc mt-8 flex gap-2"></div>
+          </div>
+          <div class="relative mx-auto w-full max-w-[400px]">
+            <!-- PROFILE PHOTO: transparent cutout. Keep avinash.png and avinash.webp next to index.html -->
+            <div class="ph">
+              <picture>
+                <source srcset="Avinashh.webp" type="image/webp" />
+                <img
+                  src="Avinashh.png"
+                  width="720"
+                  height="960"
+                  alt="Portrait of Avinash Pratap Singh"
+                  fetchpriority="high"
+                />
+              </picture>
+            </div>
+            <pre
+              class="card code shadow-xl shadow-blue-900/10"
+              aria-hidden="true"
+            ><b>SELECT</b> category, <b>COUNT</b>(*)
+<b>FROM</b> records
+<b>GROUP BY</b> category;</pre>
+            <div
+              class="card mini shadow-xl shadow-blue-900/10"
+              aria-hidden="true"
+            >
+              <div class="mbars"><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div id="app"></div>
+    </main>
+    <footer
+      class="border-t border-blue-200/70 bg-blue-100/60 dark:border-blue-900/50 dark:bg-[#0a1630]"
+    >
+      <div
+        class="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-[1.2fr_1fr_auto]"
+      >
+        <div>
+          <p class="font-display text-xl font-extrabold t">
+            Avinash Pratap Singh
+          </p>
+          <p class="font-semibold text-blue-700 dark:text-sky-400">
+            Data Analyst | Business Analyst | MIS Analyst
+          </p>
+          <p class="mt-2 text-sm">
+            Turning data into meaningful insights and actionable business
+            decisions.
+          </p>
+        </div>
+        <nav
+          aria-label="Footer"
+          id="fl"
+          class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-sm"
+        ></nav>
+        <div class="soc flex gap-2"></div>
+      </div>
+      <p
+        class="border-t border-slate-200 py-5 text-center text-xs text-slate-500 dark:border-slate-800"
+      >
+        © 2026 Avinash Pratap Singh. All Rights Reserved.
+      </p>
+    </footer>
+    <button
+      id="toTop"
+      type="button"
+      aria-label="Scroll to top"
+      class="sb fixed bottom-5 right-5 z-40 hidden bg-white shadow-lg dark:bg-[#0d1a33]"
+    >
+      <i data-lucide="arrow-up" class="h-[18px] w-[18px]"></i>
+    </button>
+    <!-- Scripts load in this order: data -> components -> interactions -> background -->
+    <script src="js/data.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="js/background.js"></script>
+  </body>
+</html>
